@@ -1,0 +1,206 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: evolution-pipeline-config
+  namespace: travelhub
+data:
+  pipeline.yaml: |
+    evolution_pipeline:
+      metadata:
+        name: "TravelHub Genetic Evolution Pipeline"
+        version: "1.0.0"
+        description: "Continuous evolution pipeline for genetic coding"
+      
+      triggers:
+        - type: code_commit
+          threshold: 5
+          branch_patterns: ["main", "develop", "feature/*"]
+          
+        - type: performance_threshold
+          metrics:
+            response_time:
+              threshold: 200
+              unit: "ms"
+            throughput:
+              threshold: 1000
+              unit: "rps"
+            error_rate:
+              threshold: 0.01
+              unit: "percentage"
+              
+        - type: user_feedback
+          score_threshold: 3.5
+          sample_size: 100
+          
+        - type: security_alert
+          severity: ["medium", "high", "critical"]
+          
+        - type: resource_utilization
+          cpu_threshold: 80
+          memory_threshold: 85
+          
+      phases:
+        1_mutation_generation:
+          agents: ["backend", "frontend", "database", "infrastructure"]
+          strategies:
+            - "performance_optimization"
+            - "security_enhancement"
+            - "usability_improvement"
+            - "scalability_enhancement"
+          parallel_execution: true
+          timeout: "30m"
+          
+        2_fitness_evaluation:
+          metrics:
+            performance_score:
+              weight: 0.3
+              components: ["response_time", "throughput", "resource_usage"]
+            maintainability_score:
+              weight: 0.25
+              components: ["code_complexity", "test_coverage", "documentation"]
+            user_satisfaction_score:
+              weight: 0.25
+              components: ["usability", "accessibility", "feedback_rating"]
+            security_score:
+              weight: 0.2
+              components: ["vulnerability_count", "compliance_score", "penetration_test"]
+          minimum_fitness: 0.7
+          
+        3_selection_process:
+          selection_strategy: "tournament"
+          selection_rate: 0.7
+          elite_preservation: 0.1
+          diversity_maintenance: true
+          
+        4_integration_testing:
+          test_suites:
+            - name: "unit_tests"
+              coverage_threshold: 80
+              parallel: true
+            - name: "integration_tests"
+              environments: ["staging"]
+            - name: "performance_tests"
+              load_patterns: ["normal", "peak", "stress"]
+            - name: "security_tests"
+              scans: ["sast", "dast", "dependency"]
+            - name: "accessibility_tests"
+              standards: ["WCAG-2.1-AA"]
+          failure_threshold: 0.05
+          
+        5_deployment:
+          strategy: "blue_green"
+          environments:
+            - name: "staging"
+              auto_promote: true
+              fitness_threshold: 0.8
+            - name: "production"
+              manual_approval: true
+              fitness_threshold: 0.9
+              rollback_threshold: 0.85
+          
+          canary:
+            enabled: true
+            traffic_split: [10, 25, 50, 100]
+            success_criteria:
+              error_rate: "< 0.1%"
+              response_time: "< 200ms"
+              user_satisfaction: "> 4.0"
+              
+      fitness_functions:
+        performance:
+          weight: 0.3
+          metrics:
+            - name: "response_time"
+              target: 100
+              unit: "ms"
+              weight: 0.4
+            - name: "throughput"
+              target: 1000
+              unit: "rps"
+              weight: 0.3
+            - name: "cpu_usage"
+              target: 70
+              unit: "percentage"
+              weight: 0.3
+              
+        maintainability:
+          weight: 0.25
+          metrics:
+            - name: "code_complexity"
+              target: 10
+              weight: 0.3
+            - name: "test_coverage"
+              target: 85
+              unit: "percentage"
+              weight: 0.4
+            - name: "documentation_score"
+              target: 80
+              weight: 0.3
+              
+        user_experience:
+          weight: 0.25
+          metrics:
+            - name: "user_satisfaction"
+              target: 4.5
+              scale: 5
+              weight: 0.4
+            - name: "accessibility_score"
+              target: 95
+              weight: 0.3
+            - name: "usability_score"
+              target: 85
+              weight: 0.3
+              
+        security:
+          weight: 0.2
+          metrics:
+            - name: "vulnerability_count"
+              target: 0
+              weight: 0.4
+            - name: "security_test_score"
+              target: 95
+              weight: 0.3
+            - name: "compliance_score"
+              target: 100
+              weight: 0.3
+              
+      genetic_operations:
+        mutation:
+          rate: 0.1
+          strategies:
+            - "random_parameter_adjustment"
+            - "algorithm_substitution"
+            - "architecture_modification"
+            - "configuration_tuning"
+            
+        crossover:
+          rate: 0.7
+          strategies:
+            - "single_point"
+            - "multi_point"
+            - "uniform"
+            - "pattern_based"
+            
+        selection:
+          strategy: "tournament"
+          tournament_size: 3
+          pressure: 1.2
+          
+      evolution_history:
+        retention_period: "90d"
+        metrics_granularity: "1h"
+        backup_strategy: "incremental"
+        
+      notifications:
+        channels:
+          - type: "slack"
+            webhook: "${SLACK_WEBHOOK_URL}"
+            events: ["evolution_started", "evolution_completed", "fitness_improved"]
+          - type: "email"
+            recipients: ["team@travelhub.com"]
+            events: ["evolution_failed", "critical_fitness_decline"]
+            
+      reporting:
+        dashboard_url: "http://evolution-dashboard.travelhub.local"
+        metrics_endpoint: "http://prometheus.monitoring.svc.cluster.local:9090"
+        alerts_endpoint: "http://alertmanager.monitoring.svc.cluster.local:9093"

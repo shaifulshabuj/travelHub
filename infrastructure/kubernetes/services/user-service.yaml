@@ -1,0 +1,168 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+  namespace: travelhub
+  labels:
+    app: user-service
+    component: backend
+    evolution.travelhub.com/enabled: "true"
+    evolution.travelhub.com/generation: "1"
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+        component: backend
+        evolution.travelhub.com/service-type: "CRUD"
+        evolution.travelhub.com/dna-version: "1.0.0"
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
+        evolution.travelhub.com/fitness-threshold: "0.8"
+        evolution.travelhub.com/auto-scale: "true"
+    spec:
+      containers:
+      - name: user-service
+        image: travelhub/user-service:latest
+        ports:
+        - containerPort: 8080
+          name: http
+        - containerPort: 8081
+          name: management
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "kubernetes"
+        - name: SERVICE_DNA_GENERATION
+          value: "1"
+        - name: EVOLUTION_ENABLED
+          value: "true"
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          value: "kafka.infrastructure.svc.cluster.local:9092"
+        - name: REDIS_HOST
+          value: "redis.infrastructure.svc.cluster.local"
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: database-secrets
+              key: user-service-url
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: management
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: management
+          initialDelaySeconds: 20
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        # Genetic evolution configuration
+        volumeMounts:
+        - name: evolution-config
+          mountPath: /app/config/evolution
+          readOnly: true
+        - name: dna-config
+          mountPath: /app/config/dna
+          readOnly: true
+      volumes:
+      - name: evolution-config
+        configMap:
+          name: evolution-pipeline-config
+      - name: dna-config
+        configMap:
+          name: user-service-dna
+      serviceAccountName: user-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+  namespace: travelhub
+  labels:
+    app: user-service
+    component: backend
+spec:
+  selector:
+    app: user-service
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+  - name: management
+    port: 8081
+    targetPort: 8081
+  type: ClusterIP
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: user-service-hpa
+  namespace: travelhub
+  annotations:
+    evolution.travelhub.com/adaptive-scaling: "true"
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: user-service
+  minReplicas: 2
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Pods
+    pods:
+      metric:
+        name: http_requests_per_second
+      target:
+        type: AverageValue
+        averageValue: "100"
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15
+      - type: Pods
+        value: 2
+        periodSeconds: 60
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 10
+        periodSeconds: 60
