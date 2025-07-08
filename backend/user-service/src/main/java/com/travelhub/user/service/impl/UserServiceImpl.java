@@ -1,0 +1,96 @@
+package com.travelhub.user.service.impl;
+
+import com.travelhub.user.dto.CreateUserRequest;
+import com.travelhub.user.entity.User;
+import com.travelhub.user.repository.UserRepository;
+import com.travelhub.user.service.UserService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+/**
+ * User Service Implementation with Genetic Evolution
+ */
+@Service
+@RequiredArgsConstructor
+@Slf4j
+@Transactional
+public class UserServiceImpl implements UserService {
+    
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    
+    @Override
+    public User createUser(CreateUserRequest request) {
+        log.debug("Creating user with email: {}", request.getEmail());
+        
+        if (existsByEmail(request.getEmail())) {
+            throw new RuntimeException("Email already exists: " + request.getEmail());
+        }
+        
+        User user = User.builder()
+                .email(request.getEmail())
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .phone(request.getPhone())
+                .status(User.UserStatus.ACTIVE)
+                .roles(Set.of(User.UserRole.USER))
+                .geneticGeneration(1)
+                .fitnessScore(0.0)
+                .build();
+        
+        return userRepository.save(user);
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+    
+    @Override
+    @Cacheable(value = "users", key = "#id")
+    @Transactional(readOnly = true)
+    public User findByIdWithCache(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+    
+    @Override
+    public User updateUser(Long id, User user) {
+        User existingUser = findByIdWithCache(id);
+        // Update logic here
+        return userRepository.save(existingUser);
+    }
+    
+    @Override
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+}

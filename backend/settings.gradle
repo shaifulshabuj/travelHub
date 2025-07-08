@@ -1,0 +1,2 @@
+rootProject.name = 'travelhub-backend'
+include 'user-service'

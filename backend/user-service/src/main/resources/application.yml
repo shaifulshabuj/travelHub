@@ -1,0 +1,94 @@
+spring:
+  application:
+    name: user-service
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/travelhub
+    username: travelhub
+    password: travelhub123
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  
+  data:
+    mongodb:
+      uri: mongodb://travelhub:travelhub123@localhost:27017/travelhub?authSource=admin
+  
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 2000ms
+  
+  cache:
+    type: redis
+    redis:
+      time-to-live: 600000
+  
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.JsonSerializer
+    consumer:
+      group-id: user-service-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.JsonDeserializer
+
+server:
+  port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+# Genetic Service DNA Configuration
+service:
+  dna:
+    service-id: user-service
+    service-type: CRUD
+    version: 1.0.0
+    generation: 1
+    scaling-strategy: HORIZONTAL
+    caching-strategy: REDIS
+    persistence-strategy: JPA
+    api-style: REST
+    messaging-pattern: ASYNC
+    authentication-method: JWT
+    authorization-level: ROLE
+    evolution:
+      enabled: true
+      real-time-capability: true
+      caching-enabled: true
+      auto-scaling-enabled: true
+      performance-optimization: true
+      security-hardening: true
+    performance:
+      target-response-time: 100
+      target-throughput: 1000
+      target-availability: 99.9
+      target-error-rate: 0.1
+    quality:
+      target-test-coverage: 80.0
+      target-code-quality: 8.0
+      target-security-score: 9.0
+      target-maintainability: 8.5
+
+logging:
+  level:
+    com.travelhub: DEBUG
+    org.springframework.security: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
