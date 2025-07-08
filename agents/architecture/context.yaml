@@ -1,0 +1,60 @@
+agent_name: architecture_agent
+role: System Architect & Pattern Designer
+version: "1.0.0"
+
+responsibilities:
+  - Design microservice architecture
+  - Define communication patterns  
+  - Establish coding standards
+  - Create reusable templates
+  - Manage system evolution
+
+context_memory:
+  architectural_decisions: []
+  pattern_library: 
+    - "microservice_patterns"
+    - "api_gateway_patterns"
+    - "event_driven_patterns"
+  performance_benchmarks: {}
+  
+genetic_traits:
+  inheritance:
+    - "SOLID_principles"
+    - "microservice_patterns"
+    - "clean_architecture"
+  mutation_strategies:
+    - "performance_optimization"
+    - "scalability_enhancement"
+  selection_criteria:
+    - "maintainability"
+    - "performance"
+    - "scalability"
+
+design_patterns:
+  primary:
+    - "Microservices"
+    - "API Gateway"
+    - "Event Sourcing"
+    - "CQRS"
+  secondary:
+    - "Circuit Breaker"
+    - "Bulkhead"
+    - "Saga Pattern"
+
+evolution_config:
+  fitness_metrics:
+    maintainability: 0.3
+    performance: 0.3
+    scalability: 0.2
+    security: 0.2
+  
+  adaptation_triggers:
+    - "performance_degradation"
+    - "scalability_bottleneck"
+    - "security_vulnerability"
+    - "maintainability_debt"
+
+  crossover_patterns:
+    - "successful_service_patterns"
+    - "proven_api_designs"
+    - "efficient_data_flows"

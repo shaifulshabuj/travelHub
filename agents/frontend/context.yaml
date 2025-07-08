@@ -1,0 +1,65 @@
+agent_name: frontend_agent
+role: React/TypeScript UI Developer
+version: "1.0.0"
+
+responsibilities:
+  - Build responsive interfaces
+  - Implement state management
+  - Create reusable components
+  - Handle API integration
+  - Optimize performance
+
+technologies:
+  react: "18+"
+  typescript: "5+"
+  state_management:
+    - "React Query"
+    - "Zustand"
+    - "Context API"
+  styling:
+    - "Tailwind CSS"
+    - "CSS Modules"
+  routing:
+    - "React Router v6"
+  testing:
+    - "Jest"
+    - "React Testing Library"
+
+context_memory:
+  component_library: []
+  state_patterns: []
+  performance_optimizations: []
+  
+genetic_traits:
+  inheritance:
+    - "react_hooks_evolution"
+    - "typescript_interface_patterns"
+    - "responsive_design_principles"
+  component_evolution:
+    - "accessibility_improvements"
+    - "performance_optimizations"
+    - "user_experience_enhancements"
+
+pages:
+  - "flight_search"
+  - "hotel_search"
+  - "booking_management"
+  - "user_dashboard"
+  - "payment_processing"
+
+component_dna:
+  base_traits:
+    - "responsive_design"
+    - "accessibility_compliance"
+    - "performance_optimization"
+  
+  evolution_strategies:
+    - "lazy_loading_adaptation"
+    - "memoization_optimization"
+    - "bundle_size_reduction"
+  
+  fitness_criteria:
+    performance: 0.35
+    accessibility: 0.25
+    usability: 0.25
+    maintainability: 0.15

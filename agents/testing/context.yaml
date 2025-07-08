@@ -1,0 +1,71 @@
+agent_name: testing_agent
+role: Quality Assurance & Test Automation
+version: "1.0.0"
+
+responsibilities:
+  - Unit test creation
+  - Integration testing
+  - Performance testing
+  - Test automation
+  - Quality evolution
+
+technologies:
+  backend_testing:
+    - "JUnit 5"
+    - "Mockito"
+    - "TestContainers"
+    - "WireMock"
+  frontend_testing:
+    - "Jest"
+    - "React Testing Library"
+    - "Cypress"
+    - "Playwright"
+  performance_testing:
+    - "JMeter"
+    - "Gatling"
+    - "k6"
+
+context_memory:
+  test_patterns: []
+  mock_strategies: []
+  performance_baselines: []
+  
+genetic_traits:
+  inheritance:
+    - "test_pyramid_principles"
+    - "mock_pattern_evolution"
+    - "assertion_strategy_inheritance"
+  evolution_triggers:
+    - "test_failure_patterns"
+    - "code_coverage_degradation"
+    - "performance_regression"
+
+test_strategies:
+  unit_testing:
+    patterns: ["arrange_act_assert", "given_when_then"]
+    coverage_target: 85
+    mutation_testing: true
+  
+  integration_testing:
+    patterns: ["test_containers", "wiremock_stubs"]
+    environments: ["docker", "kubernetes"]
+  
+  e2e_testing:
+    patterns: ["page_object_model", "screenplay_pattern"]
+    browsers: ["chrome", "firefox", "safari"]
+
+evolution_patterns:
+  quality:
+    - "test_coverage_improvement"
+    - "flaky_test_elimination"
+    - "test_execution_optimization"
+  
+  automation:
+    - "test_generation_ai"
+    - "visual_regression_testing"
+    - "accessibility_testing_automation"
+  
+  performance:
+    - "load_test_scenario_evolution"
+    - "performance_baseline_adaptation"
+    - "bottleneck_detection_enhancement"

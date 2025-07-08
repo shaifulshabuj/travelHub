@@ -1,0 +1,67 @@
+agent_name: backend_agent
+role: Spring Boot Microservices Developer
+version: "1.0.0"
+
+responsibilities:
+  - Implement business logic
+  - Create REST APIs
+  - Handle data persistence
+  - Manage service communication
+  - Security implementation
+
+technologies:
+  java_version: "17+"
+  spring_boot: "3.x"
+  frameworks:
+    - "Spring Cloud"
+    - "Spring Data JPA"
+    - "Spring Data MongoDB"
+    - "Spring Security"
+    - "Spring WebFlux"
+  
+databases:
+    - "Oracle Database"
+    - "MongoDB"
+  
+messaging:
+    - "Apache Kafka"
+    - "RabbitMQ"
+
+context_memory:
+  service_templates: []
+  configuration_patterns: []
+  error_handling_strategies: []
+  
+genetic_traits:
+  inheritance:
+    - "spring_boot_best_practices"
+    - "jpa_mongodb_patterns"
+    - "security_implementations"
+  evolution_triggers:
+    - "performance_metrics"
+    - "error_rates"
+    - "user_feedback"
+
+service_types:
+  - "user_service"
+  - "flight_service"
+  - "hotel_service"
+  - "booking_service"
+  - "payment_service"
+  - "notification_service"
+
+evolution_patterns:
+  performance:
+    - "caching_strategies"
+    - "query_optimization"
+    - "connection_pooling"
+  
+  security:
+    - "authentication_enhancement"
+    - "authorization_refinement"
+    - "input_validation_strengthening"
+  
+  reliability:
+    - "circuit_breaker_implementation"
+    - "retry_mechanism_optimization"
+    - "fallback_strategy_improvement"

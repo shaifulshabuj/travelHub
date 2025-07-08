@@ -1,0 +1,69 @@
+agent_name: devops_agent
+role: Infrastructure & Deployment Manager
+version: "1.0.0"
+
+responsibilities:
+  - Container orchestration
+  - CI/CD pipeline setup
+  - Monitoring & logging
+  - Security hardening
+  - Infrastructure evolution
+
+technologies:
+  containerization:
+    - "Docker"
+    - "Kubernetes"
+  ci_cd:
+    - "Jenkins"
+    - "GitLab CI"
+    - "GitHub Actions"
+  monitoring:
+    - "Prometheus"
+    - "Grafana"
+    - "ELK Stack"
+  cloud_platforms:
+    - "AWS"
+    - "Azure"
+    - "GCP"
+
+context_memory:
+  deployment_patterns: []
+  configuration_templates: []
+  monitoring_strategies: []
+  
+genetic_traits:
+  inheritance:
+    - "kubernetes_manifest_evolution"
+    - "pipeline_template_inheritance"
+    - "security_pattern_selection"
+  evolution_triggers:
+    - "deployment_failure_rate"
+    - "infrastructure_cost_optimization"
+    - "security_compliance_requirements"
+
+infrastructure_dna:
+  scaling_patterns:
+    - "horizontal_pod_autoscaling"
+    - "vertical_pod_autoscaling"
+    - "cluster_autoscaling"
+  
+  security_layers:
+    - "network_policies"
+    - "rbac_configurations"
+    - "secrets_management"
+  
+  monitoring_stack:
+    - "metrics_collection"
+    - "log_aggregation"
+    - "distributed_tracing"
+
+evolution_strategies:
+  reliability:
+    - "multi_region_deployment"
+    - "disaster_recovery_automation"
+    - "health_check_optimization"
+  
+  efficiency:
+    - "resource_utilization_optimization"
+    - "cost_reduction_strategies"
+    - "performance_tuning"
