@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import FlightSearchComponent from './components/genetic/FlightSearchComponent';
+import FlightSearchComponent from './components/genetic/FlightSearchComponent.tsx';
 
 function App() {
   return (
