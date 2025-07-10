@@ -1,1 +1,7 @@
 frontend/node_modules
+backend/build/
+backend/*/build/
+backend/.gradle/
+backend/*/.gradle/
+*.log
+.DS_Store
