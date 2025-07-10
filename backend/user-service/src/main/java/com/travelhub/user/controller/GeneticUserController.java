@@ -48,7 +48,8 @@ public class GeneticUserController implements EvolvableController {
         // Apply caching strategy based on genetic configuration
         User user = dna.getEvolution().isCachingEnabled() 
             ? userService.findByIdWithCache(id)
-            : userService.findById(id);
+            : userService.findById(id).orElseThrow(() -> 
+                new RuntimeException("User not found with id: " + id));
             
         UserResponse response = userMapper.toResponse(user);
         
@@ -99,7 +100,8 @@ public class GeneticUserController implements EvolvableController {
             @PathVariable Long id, 
             @Valid @RequestBody CreateUserRequest request) {
         
-        User existingUser = userService.findById(id);
+        User existingUser = userService.findById(id)
+            .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
         User updatedUser = userMapper.updateFromRequest(existingUser, request);
         
         // Apply genetic optimizations

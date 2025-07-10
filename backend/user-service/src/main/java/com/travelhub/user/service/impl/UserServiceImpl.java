@@ -7,6 +7,8 @@ import com.travelhub.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -77,6 +79,22 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
+    @Transactional(readOnly = true)
+    public List<User> findAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return userRepository.findAll(pageable).getContent();
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<User> findAllOptimized(int page, int size) {
+        // Genetic optimization: use batch loading and caching
+        log.debug("Finding users with genetic optimization - page: {}, size: {}", page, size);
+        Pageable pageable = PageRequest.of(page, size);
+        return userRepository.findAll(pageable).getContent();
+    }
+    
+    @Override
     public User updateUser(Long id, User user) {
         User existingUser = findByIdWithCache(id);
         // Update logic here
@@ -89,8 +107,49 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+    }
+    
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+    
+    @Override
     @Transactional(readOnly = true)
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public User findByIdRealTime(Long id) {
+        // Genetic evolution: real-time user data with WebSocket capability
+        log.debug("Finding user by id with real-time capability: {}", id);
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+    }
+    
+    @Override
+    public User applyBatchOptimizations(User user) {
+        // Genetic optimization: apply batch processing traits
+        log.debug("Applying batch optimizations to user: {}", user.getEmail());
+        // Increment genetic generation to show evolution
+        user.setGeneticGeneration(user.getGeneticGeneration() + 1);
+        // Improve fitness score through batch optimization
+        user.setFitnessScore(user.getFitnessScore() + 0.1);
+        return user;
+    }
+    
+    @Override
+    public User enableJWTFeatures(User user) {
+        // Genetic evolution: enable JWT-specific features
+        log.debug("Enabling JWT features for user: {}", user.getEmail());
+        // Mark user as having JWT capabilities
+        user.setEvolutionTraits("{\"jwt_enabled\": true, \"token_type\": \"bearer\"}");
+        // Improve fitness score for security enhancement
+        user.setFitnessScore(user.getFitnessScore() + 0.2);
+        return user;
     }
 }

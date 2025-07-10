@@ -5,6 +5,9 @@ import com.travelhub.user.dto.UserResponse;
 import com.travelhub.user.entity.User;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * User Mapper for DTO conversions
  */
@@ -25,6 +28,31 @@ public class UserMapper {
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
                 .build();
+    }
+    
+    public List<UserResponse> toResponseList(List<User> users) {
+        return users.stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+    }
+    
+    public User fromRequest(CreateUserRequest request) {
+        return User.builder()
+                .email(request.getEmail())
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .password(request.getPassword())
+                .phone(request.getPhone())
+                .build();
+    }
+    
+    public User updateFromRequest(User existingUser, CreateUserRequest request) {
+        existingUser.setEmail(request.getEmail());
+        existingUser.setFirstName(request.getFirstName());
+        existingUser.setLastName(request.getLastName());
+        existingUser.setPhone(request.getPhone());
+        // Don't update password here - would need separate method for security
+        return existingUser;
     }
     
     public User toEntity(CreateUserRequest request) {
