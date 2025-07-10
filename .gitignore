@@ -37,3 +37,27 @@ Thumbs.db
 
 # Cross-browser testing reports
 browser-compatibility-reports/
+
+# Build artifacts
+frontend/build/
+backend/build/
+dist/
+coverage/
+
+# IDE files
+.vscode/
+.idea/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
