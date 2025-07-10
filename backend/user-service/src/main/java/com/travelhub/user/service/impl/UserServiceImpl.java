@@ -82,56 +82,38 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll(int page, int size) {
         return userRepository.findAll(PageRequest.of(page, size)).getContent();
     }
-    
+
     @Override
     @Transactional(readOnly = true)
     public List<User> findAllOptimized(int page, int size) {
         // Optimized version with batch processing
         return userRepository.findAll(PageRequest.of(page, size)).getContent();
     }
-    
-    @Override
-    public User updateUser(Long id, User user) {
-        User existingUser = findByIdWithCache(id);
-        // Update logic here
-        return userRepository.save(existingUser);
-    }
-    
-    @Override
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
-    }
-    
-    @Override
-    public void deleteById(Long id) {
-        userRepository.deleteById(id);
-    }
-    
-    @Override
-    @Transactional(readOnly = true)
-    public boolean existsByEmail(String email) {
-        return userRepository.existsByEmail(email);
-    }
-    
+
     @Override
     public User save(User user) {
         return userRepository.save(user);
     }
-    
+
+    @Override
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+    }
+
     @Override
     @Transactional(readOnly = true)
     public User findByIdRealTime(Long id) {
         // Real-time version - for now same as regular findById
         return findByIdWithCache(id);
     }
-    
+
     @Override
     public User applyBatchOptimizations(User user) {
         // Apply batch optimization genetics
         log.debug("Applying batch optimizations to user: {}", user.getId());
         return user;
     }
-    
+
     @Override
     public User enableJWTFeatures(User user) {
         // Enable JWT-specific features

@@ -15,6 +15,10 @@ import java.util.stream.Collectors;
 public class UserMapper {
     
     public UserResponse toResponse(User user) {
+        if (user == null) {
+            throw new IllegalArgumentException("User cannot be null");
+        }
+        
         return UserResponse.builder()
                 .id(user.getId())
                 .email(user.getEmail())
@@ -30,7 +34,21 @@ public class UserMapper {
                 .build();
     }
     
+    public List<UserResponse> toResponseList(List<User> users) {
+        if (users == null) {
+            throw new IllegalArgumentException("User list cannot be null");
+        }
+        
+        return users.stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+    }
+    
     public User toEntity(CreateUserRequest request) {
+        if (request == null) {
+            throw new IllegalArgumentException("CreateUserRequest cannot be null");
+        }
+        
         return User.builder()
                 .email(request.getEmail())
                 .firstName(request.getFirstName())

@@ -21,22 +21,13 @@ public interface UserService {
     List<User> findAll();
     
     List<User> findAll(int page, int size);
-    
     List<User> findAllOptimized(int page, int size);
-    
-    User updateUser(Long id, User user);
-    
-    void deleteUser(Long id);
-    
-    void deleteById(Long id);
-    
-    boolean existsByEmail(String email);
-    
     User save(User user);
-    
+    User updateUser(Long id, User user);
+    void deleteUser(Long id);
+    void deleteById(Long id);
+    boolean existsByEmail(String email);
     User findByIdRealTime(Long id);
-    
     User applyBatchOptimizations(User user);
-    
     User enableJWTFeatures(User user);
 }
