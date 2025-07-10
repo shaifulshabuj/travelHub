@@ -1,0 +1,41 @@
+{
+  "timestamp": "2025-07-10T06:03:05.391Z",
+  "summary": {
+    "totalBrowsers": 3,
+    "passedBrowsers": 0,
+    "failedBrowsers": 3,
+    "totalTests": 0
+  },
+  "results": [
+    {
+      "browser": "Chrome (Chromium)",
+      "success": false,
+      "errors": [
+        "Failed to launch browser: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1179/chrome-linux/headless_shell\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+      ],
+      "testsRun": 0
+    },
+    {
+      "browser": "Firefox",
+      "success": false,
+      "errors": [
+        "Failed to launch browser: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/firefox-1488/firefox/firefox\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+      ],
+      "testsRun": 0
+    },
+    {
+      "browser": "Safari (WebKit)",
+      "success": false,
+      "errors": [
+        "Failed to launch browser: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/webkit-2182/pw_run.sh\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝"
+      ],
+      "testsRun": 0
+    }
+  ],
+  "recommendations": [
+    "Review failed test cases and implement browser-specific fixes",
+    "Consider adding polyfills for unsupported features",
+    "Test on additional browser versions",
+    "Implement continuous cross-browser testing in CI/CD"
+  ]
+}
