@@ -1,8 +1,13 @@
 package com.travelhub.user.evolution;
 
+import java.util.Map;
+
 /**
  * Interface for evolvable controllers
  */
 public interface EvolvableController {
-    // Marker interface for genetic evolution
+    /**
+     * Evolution method - called when genetic adaptation is triggered
+     */
+    void evolve(String trigger, Map<String, Object> context);
 }

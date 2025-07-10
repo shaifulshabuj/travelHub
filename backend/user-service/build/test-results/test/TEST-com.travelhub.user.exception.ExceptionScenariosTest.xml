@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.travelhub.user.exception.ExceptionScenariosTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2025-07-10T06:02:25.041Z" hostname="pkrvmfkh1xnbeme" time="0.038">
+  <properties/>
+  <testcase name="Test evolution engine null response handling" classname="com.travelhub.user.exception.ExceptionScenariosTest" time="0.015"/>
+  <testcase name="Test RuntimeException on duplicate email scenario" classname="com.travelhub.user.exception.ExceptionScenariosTest" time="0.002"/>
+  <testcase name="Test evolution trigger failure scenario" classname="com.travelhub.user.exception.ExceptionScenariosTest" time="0.002"/>
+  <testcase name="Test user not found exception scenario" classname="com.travelhub.user.exception.ExceptionScenariosTest" time="0.001"/>
+  <testcase name="Test user service save method with null user" classname="com.travelhub.user.exception.ExceptionScenariosTest" time="0.0"/>
+  <testcase name="Test IllegalArgumentException for invalid pagination" classname="com.travelhub.user.exception.ExceptionScenariosTest" time="0.005"/>
+  <testcase name="Test batch optimization with null user" classname="com.travelhub.user.exception.ExceptionScenariosTest" time="0.001"/>
+  <testcase name="Test NullPointerException in UserMapper" classname="com.travelhub.user.exception.ExceptionScenariosTest" time="0.001"/>
+  <testcase name="Test JWT features with null user" classname="com.travelhub.user.exception.ExceptionScenariosTest" time="0.0"/>
+  <testcase name="Test null request handling in mapper" classname="com.travelhub.user.exception.ExceptionScenariosTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -99,26 +99,3 @@ const NotFound = () => (
     </div>
   </div>
 );
-
-function App() {
-  return (
-    <Router>
-      <div>
-        <Navigation />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/flights" element={<Flights />} />
-            <Route path="/hotels" element={<Hotels />} />
-            <Route path="/bookings" element={<Bookings />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-      </div>
-    </Router>
-  );
-}
-
-export default App;
