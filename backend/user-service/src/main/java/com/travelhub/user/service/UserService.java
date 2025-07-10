@@ -25,20 +25,11 @@ public interface UserService {
     
     List<User> findAllOptimized(int page, int size);
     
+    List<User> findAll(int page, int size);
+    List<User> findAllOptimized(int page, int size);
+    User save(User user);
     User updateUser(Long id, User user);
-    
     void deleteUser(Long id);
     
-    void deleteById(Long id);
-    
-    User save(User user);
-    
     boolean existsByEmail(String email);
-    
-    // Genetic algorithm methods
-    User findByIdRealTime(Long id);
-    
-    User applyBatchOptimizations(User user);
-    
-    User enableJWTFeatures(User user);
 }

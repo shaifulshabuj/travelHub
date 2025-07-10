@@ -15,6 +15,10 @@ import java.util.stream.Collectors;
 public class UserMapper {
     
     public UserResponse toResponse(User user) {
+        if (user == null) {
+            throw new IllegalArgumentException("User cannot be null");
+        }
+        
         return UserResponse.builder()
                 .id(user.getId())
                 .email(user.getEmail())
@@ -30,13 +34,11 @@ public class UserMapper {
                 .build();
     }
     
-    public List<UserResponse> toResponseList(List<User> users) {
-        return users.stream()
-                .map(this::toResponse)
-                .collect(Collectors.toList());
-    }
-    
-    public User fromRequest(CreateUserRequest request) {
+    public User toEntity(CreateUserRequest request) {
+        if (request == null) {
+            throw new IllegalArgumentException("CreateUserRequest cannot be null");
+        }
+        
         return User.builder()
                 .email(request.getEmail())
                 .firstName(request.getFirstName())
@@ -44,6 +46,16 @@ public class UserMapper {
                 .password(request.getPassword())
                 .phone(request.getPhone())
                 .build();
+    }
+    
+    public User fromRequest(CreateUserRequest request) {
+        return toEntity(request);
+    }
+    
+    public List<UserResponse> toResponseList(List<User> users) {
+        return users.stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
     }
     
     public User updateFromRequest(User existingUser, CreateUserRequest request) {
@@ -51,17 +63,6 @@ public class UserMapper {
         existingUser.setFirstName(request.getFirstName());
         existingUser.setLastName(request.getLastName());
         existingUser.setPhone(request.getPhone());
-        // Don't update password here - would need separate method for security
         return existingUser;
-    }
-    
-    public User toEntity(CreateUserRequest request) {
-        return User.builder()
-                .email(request.getEmail())
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .password(request.getPassword())
-                .phone(request.getPhone())
-                .build();
     }
 }
