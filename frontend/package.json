@@ -52,7 +52,9 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "evolution:analyze": "node scripts/evolution-analyzer.js",
-    "evolution:mutate": "node scripts/genetic-mutator.js"
+    "evolution:mutate": "node scripts/genetic-mutator.js",
+    "check-links": "node scripts/link-checker.js",
+    "test:navigation": "playwright test tests/navigation.spec.ts"
   },
   "eslintConfig": {
     "extends": [
