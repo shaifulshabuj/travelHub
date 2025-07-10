@@ -53,6 +53,12 @@ management:
     health:
       show-details: always
 
+# External Services Configuration
+services:
+  booking-service:
+    url: http://localhost:8082
+    timeout: 2000
+
 # Genetic Service DNA Configuration
 service:
   dna:

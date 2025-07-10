@@ -20,25 +20,14 @@ public interface UserService {
     
     List<User> findAll();
     
-    // Additional method signatures to fix compilation errors
     List<User> findAll(int page, int size);
-    
     List<User> findAllOptimized(int page, int size);
-    
     User save(User user);
-    
     User updateUser(Long id, User user);
-    
     void deleteUser(Long id);
-    
     void deleteById(Long id);
-    
     boolean existsByEmail(String email);
-    
-    // Genetic evolution related methods
     User findByIdRealTime(Long id);
-    
     User applyBatchOptimizations(User user);
-    
     User enableJWTFeatures(User user);
 }

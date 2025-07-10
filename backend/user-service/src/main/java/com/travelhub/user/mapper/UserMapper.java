@@ -62,29 +62,17 @@ public class UserMapper {
         return toEntity(request);
     }
     
+    public List<UserResponse> toResponseList(List<User> users) {
+        return users.stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+    }
+    
     public User updateFromRequest(User existingUser, CreateUserRequest request) {
-        if (existingUser == null) {
-            throw new IllegalArgumentException("Existing user cannot be null");
-        }
-        if (request == null) {
-            throw new IllegalArgumentException("Update request cannot be null");
-        }
-        
-        // Update fields - could throw NPE if request has null values
-        if (request.getEmail() != null) {
-            existingUser.setEmail(request.getEmail());
-        }
-        if (request.getFirstName() != null) {
-            existingUser.setFirstName(request.getFirstName());
-        }
-        if (request.getLastName() != null) {
-            existingUser.setLastName(request.getLastName());
-        }
-        if (request.getPhone() != null) {
-            existingUser.setPhone(request.getPhone());
-        }
-        // Note: Password update would need special handling
-        
+        existingUser.setEmail(request.getEmail());
+        existingUser.setFirstName(request.getFirstName());
+        existingUser.setLastName(request.getLastName());
+        existingUser.setPhone(request.getPhone());
         return existingUser;
     }
 }
