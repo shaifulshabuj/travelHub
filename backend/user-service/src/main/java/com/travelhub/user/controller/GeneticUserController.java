@@ -48,8 +48,8 @@ public class GeneticUserController implements EvolvableController {
         // Apply caching strategy based on genetic configuration
         User user = dna.getEvolution().isCachingEnabled() 
             ? userService.findByIdWithCache(id)
-            : userService.findById(id).orElseThrow(() -> new RuntimeException("User not found with id: " + id));
-        
+            : userService.findById(id);
+            
         UserResponse response = userMapper.toResponse(user);
         
         // Evolution trigger: track performance

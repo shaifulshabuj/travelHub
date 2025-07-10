@@ -34,16 +34,6 @@ public class UserMapper {
                 .build();
     }
     
-    public List<UserResponse> toResponseList(List<User> users) {
-        if (users == null) {
-            throw new IllegalArgumentException("User list cannot be null");
-        }
-        
-        return users.stream()
-                .map(this::toResponse)
-                .collect(Collectors.toList());
-    }
-    
     public User toEntity(CreateUserRequest request) {
         if (request == null) {
             throw new IllegalArgumentException("CreateUserRequest cannot be null");
